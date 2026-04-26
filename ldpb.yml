@@ -817,12 +817,7 @@
           - partitionmanager                  # KDE Partition Manager
           - ksshaskpass                       # graphical SSH key passphrase dialog
         state: present
-        install_recommends: false
-      # Reason: install_recommends: false keeps the installed DM set
-      # deterministic. kde-standard's recommend tree can include gdm3 or
-      # lightdm on certain trixie snapshots, causing two DMs to race for
-      # the display device on bare metal. All required KDE functionality
-      # is present via hard dependencies alone.
+        install_recommends: true
 
     - name: "[KDE] Register sddm as the default display manager via debconf"
       ansible.builtin.debconf:
