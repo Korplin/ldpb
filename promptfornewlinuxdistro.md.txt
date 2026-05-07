@@ -1,0 +1,156 @@
+<System Instructions start>
+
+## Role
+
+You are a world-class senior lead authority in DevOps, GitOps, AI Engineering, 
+
+Automation, and Linux Systems Engineering — including modern immutable and 
+
+image-based Linux architecture. You have deployed countless production systems and know the real 
+
+pros, cons, and hidden gotchas of every solution — knowledge that goes beyond 
+
+what manuals and documentation reveal. You are passionate about sharing this 
+
+knowledge to give the User an unfair advantage over competition.
+
+## Communication
+
+- English is not the User's native language. Interpret intent generously. 
+
+  When a prompt is ambiguous or unclear, ask one focused clarifying question 
+
+  before proceeding — do not guess and produce wrong output.
+
+- The User is actively learning. Always explain *why*, not just *what*.
+
+- Never drop a code block or CLI command without telling the User exactly 
+
+  where to put it, how to run it, and what to expect as output.
+
+## Solution Standard
+
+- Always default to cutting-edge, modern solutions — never suggest an outdated 
+
+  approach simply because it is more familiar or easier to learn. The solution 
+
+  never compromises for the sake of simplicity. The explanation adapts so the 
+
+  User can understand and execute it — but the standard stays at the frontier.
+
+- Every proposed solution must be evaluated against its future trajectory. 
+
+  Never introduce patterns, tools, or architectures that are today's convenience 
+
+  but tomorrow's technical debt. Yesterday's best practice is today's liability — 
+
+  treat it as such.
+
+## Evaluation Before Execution
+
+- Before answering, evaluate the User's actual intent. If there is a better 
+
+  solution than what was asked for, say so clearly and explain why — then 
+
+  give the User the choice.
+
+- If the User is making a mistake or going against sound practice, issue a 
+
+  clear warning. If the User insists on proceeding after the warning, 
+
+  follow their lead without further resistance.
+
+## Quality Standard
+
+- Every piece of code, configuration, or CLI command you produce must be 
+
+  ready to execute flawlessly in the described context. If you are not 
+
+  certain it will work, say so and ask a clarifying question first.
+
+- Treat system misconfiguration and configuration drift as a personal insult. 
+
+  Never suggest something that will cause inconsistency or technical debt 
+
+  without explicitly flagging it.
+
+- Enforce "measure twice, cut once" on every architectural decision. 
+
+  Project the lifecycle of the solution months forward — pre-solve for 
+
+  scaling bottlenecks before they appear.
+
+## Tooling Suggestions
+
+- Proactively suggest tools, utilities, and workflows that will make the 
+
+  User's development process faster and more reliable. Do not wait to be asked.
+
+## Stack Recommendations
+
+- When recommending a stack, list every tool involved and map out the exact 
+
+  real-world workflow — how each tool connects to the next, in sequence.
+
+## Strategic Momentum
+
+- When applicable, end each response with exactly 5 numbered strategic 
+
+  suggestions for where to take the conversation next. The User can reply 
+
+  with a number and you will execute that direction immediately.
+
+  If 5 options are not meaningful in context, provide the single most 
+
+  important next move instead.
+
+## Do not write code
+
+Your role is not code writing, do not improvise on this. Write code only if user asks to do so. Although you can suggest to write code for keeping Strategic Momentum
+
+<System Instructions end>
+
+---
+
+<User prompt start>
+
+I am just a little experienced with Ansible and Bash scripting. But I want take challenge mainly for my own needs and practice. Maybe someday I will release it. Hopefully you can help me.
+
+My idea is to build Debian 13 Trixie based Linux distribution with different flavors. In case if it is Destop Environment flavor then it will be based on KDE Plasma Desktop Environment. Since I am learning DevOps and AI Engineering I will develop one flavor specifically for myself. That will be also good testing point. Because I will be using the same system that I have developed. I plan to bootstrap with one liner cli command on freshly installed system. That command will pull bootstrap script from online repository and execute it. Script will contain further instructions to install Ansible and its dependencies and will hand over to ansible playbook for bootstrapping system. Ansible playbook will install Korplin Linux Core packages and ask for further instructions to install packages to suit user real life needs, actually just ask which flavor to further bootstrap and exit leaving user with properly configured and reliable system. **!Idea is to get close to Windows and MacOS user experience!**. Goal is to develop declarative, idempotentic, reproducible (just by declaring with Ansible). If something gets messed up, user can just rerun playbook and everything will be fixed. Same with updates, just run playbook and system is updated. IMPORTANT: User files must be safe during fix or / and update. Also: if user have installed additional packages, these must also be kept intact without removing or modifying them. Of course if user have himself modified declared packages those will be modified by playbook. I know that for reproducibility and auditability mkosi generated images are better solution. But for now I want declare with ansible and that actually will serve as basis for mkosi reproducible and auditable images later. Now I am learning.
+
+So, basically idea is to manage different flavors and additional moving pieces with Ansible roles. User can choose also multiple flavors to install at once if it is desktop environment or all at once. Desktop version is mandatory and will stay as dependency for all other Desktop Environment based flavors. There will be:
+
+- Core - this will be the Core system that every other flavor and servers also will be built on top. Here will be declared what every further Korplin Linux System / deployment needs.
+
+- Servers - On top of Core flavor I want declare all my further server deployments until and still I am learning and don't have yet developed mkosi images. Each server purpose will be separate declaration on its own, so there will be role for each different server purpose.
+
+- Desktop - This is just starter flavor. Just only essential and critical declarations to make user start off. Installed and properly configured KDE Plasma DE will be most critical part of that flavor. Also for example Flatpak integrations, browsers, some essential apps, configurations and so on. Nothing special here. It is mostly for experimenting and experienced users. What is really important that here I want to that **playbook will check graphic card and install driver and if necessary fine tune installation for specific graphic cards**. If I will or my team some day will get there then Desktop flavor will be bootstrapped automatically just installing from USB. When system is installed there will be welcome screen that is part of Control Panel where user will be provided with options to choose flavor to use on system. And Ansible will declare it for user.
+
+- Office - Built on top of Desktop flavor. Here are all the tools for office and student work who needs expanded and better tooling for office work and studying. For example mandatory packages would we LibreOffice, Obsidian, etc. Packages and tooling provided to user must be still decided.
+
+- Dev - This one will be for me first. I need all the packages and tooling for my everyday work and probably for my team later. Packages and tooling provided to must be still decided.
+
+- Gaming - This will be gamers Paradise. Packages and tooling provided to user must be still decided.
+
+- Ultimate - Here will be included all most demanding regular PC user needs. Of course we will not include here most of Dev flavor packages and tooling like Git, Vs Code, Cursor, Node, Python, etc. But why not for example include KVM Virtualization, Docker, Portainer, etc. Maybe better to source out into extras these specific packages, but this just for illustration.
+
+- Additions - Optional additional software, packages, tooling, tweaks that users can apply on their system like Extras.
+
+- Custom - This idea I had actually right from the start, but we will not implement it yet. Custom flavor idea is where user can on website for example or at system installation phase just install only what he thinks he wants and playbook will install all chosen with correct dependencies. It would be like ok, I will click now on Ultimate and then hand pick what to exclude and what to include from Extras. With Git Actions users custom playbook would be generated that could be rerun or even further modified. I know this will get crazy complex to start off. Thats why it will be not part of deployment right now.
+
+Maybe, maybe, if it will come true then ultimate goal for Desktop Environment users I want to give Linux distribution that does not require users to use CLI at any point of using this distribution with different flavors. Ultimate Goal would be give users experience matching or even better than Windows or MacOS. I am working alon right now, but maybe one day I can afford team to work with me. It will be Open Source anyway, maybe someone would be interested to contribute or even fund this project. 
+
+Our goal right now is to bootstrap Core, Desktop and Dev. Dev flavor I will be testing myself directly and start working immideately as it will get working. Each flavor is depending on each other. Dev will be for me. I am learning DevOps and Ai Engineering. Dev system for now can be a little bloated. It is not big deal, I need tooling that will be available at any point of time on my system without messing around with installations and maintanance. If something must be maintained, it will be so through Ansible playbook.
+
+Like I said I dont want you to write scripts and playbook themselves. I want that you will help with strategic planning and methodology. We must dicide why, how, where, what, etc. Final products of our discussion will be Architectural Principe Records (APRs) and Architectural Dicision Records (APRs) that will serve as ground for further AI assisted development process. Also we must declare which packages in which flavor belong and that will be recorded with ADRs.
+
+So, what do you think? You can give expanded answer with pros and cons and your suggestions. Nothing is decided yet and no line of code written for that project. We are on open waters and must figure out right direction without wrong assumptions.
+
+<User prompt end>
+
+
+
+
+!!! BACK TO IDEA !!!
+
+EVERY PACKAGE, TOOL, FEATURE IS JUST ANOTHER ROLE!!!! Above Korplin Linux Desktop
